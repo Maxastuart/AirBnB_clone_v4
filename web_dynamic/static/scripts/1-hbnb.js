@@ -1,13 +1,17 @@
 $(function () {
-  const chosen_amenties = {};
+  const chosenAmenities = {};
 
-  $('div.amenties li input').change(
+  $('div.amenities li input').change(
     function () {
       if ($(this).is(':checked')) {
-        chosen_amenties[($(this).attr('data-id'))] = $(this).attr('data-name');
+        chosenAmenities[($(this).attr('data-id'))] = ($(this).attr('data-name'));
       } else {
-        delete chosen_amenties[$(this).attr('data-id')];
+        delete chosenAmenities[($(this).attr('data-id'))];
       }
-      $('div.amenties h4').html(Object.values(chosen_amenties).join(', ') || '&nbsp');
-   });
+      if (chosenAmenities.length > 0) {
+        $('div.amenities h4').innerHTML = chosenAmenities.values().join(', ');
+      } else {
+        $('div.amenities h4').innerHTML = '&nbsp;';
+      }
+    });
 });
