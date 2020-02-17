@@ -12,18 +12,16 @@ $(function () {
     });
 
   $.getJSON('http://localhost:5001/api/v1/status/', data => {
-    if (data === 'OK') {
+    if (data.status === 'OK') {
       $('DIV#api_status').addClass('available');
     } else {
       $('DIV#api_status').removeClass('available');
     }
   });
 
-  $.ajax({
-    url: 'http://localhost:5001/api/v1/places_search',
+  $.ajax('http://localhost:5001/api/v1/places_search', {
     type: 'POST',
-    contentType: 'application/javascript',
-    dataType: 'JSON',
+    contentType: 'application/json',
     data: JSON.stringify({}),
     success: data => {
       data.forEach(place => {
