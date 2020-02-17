@@ -22,5 +22,8 @@ header {
 	border-radius: 50%;
 	margin-left: auto;
 	margin-right: 30px;
-	top: 50%;
+}
+
+#api_status.available {
+	background-color: #ff545f
 }
