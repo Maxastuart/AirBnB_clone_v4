@@ -4,3 +4,4 @@ __pycache__
 dev/file.json
 versions/*
 **.vs*
+100-dump.sql
