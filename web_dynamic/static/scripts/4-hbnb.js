@@ -11,7 +11,7 @@ $(function () {
       $('div.amenities h4').html(Object.values(chosen_amenities).join(', ') || '&nbsp;');
     });
 
-  $.getJSON('http://0.0.0.0:5001/api/v1/status/', data => {
+  $.getJSON('http://localhost:5001/api/v1/status/', data => {
     if (data.status === 'OK') {
       $('DIV#api_status').addClass('available');
     } else {
@@ -19,7 +19,12 @@ $(function () {
     }
   });
 
-  $.ajax('http://0.0.0.0:5001/api/v1/places_search', {
+  $('button').click(
+    function () {
+      chosen_amenities;
+    });
+
+  $.ajax('http://localhost:5001/api/v1/places_search', {
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({}),
