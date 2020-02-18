@@ -10,7 +10,7 @@ $(function () {
     $('div.amenities h4').html(Object.values(chosen_amenities).join(', ') || '&nbsp;');
   });
 
-  $.getJSON('http://localhost:5001/api/v1/status/', data => {
+  $.getJSON('http://0.0.0.0:5001/api/v1/status/', data => {
     if (data.status === 'OK') {
       $('DIV#api_status').addClass('available');
     } else {
@@ -18,24 +18,20 @@ $(function () {
     }
   });
 
-  $.ajax('http://localhost:5001/api/v1/places_search', {
+  $.ajax('http://0.0.0.0:5001/api/v1/places_search', {
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({}),
-    success: data => {
-      data.forEach(place => {
-        $('section.places').append(article_template);
-      });
-    }
+    success: data => data.forEach(place => put_article(place))
   });
 
   $('button').click(function () {
     $('section.places').empty();
     $('section.places').append('<h1>Places</h1>');
-    $.ajax('http://localhost:5001/api/v1/places_search', {
+    $.ajax('http://0.0.0.0:5001/api/v1/places_search', {
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({ amenities: chosen_amenities.values() }),
+      data: JSON.stringify({ amenities: Object.keys(chosen_amenities) }),
       success: data => data.forEach(place => put_article(place))
     });
   });
@@ -68,7 +64,7 @@ $(function () {
           <div class="description">
               ${place.description}
           </div>
-      </article>`;
+      </article>`
     );
   }
 });
